@@ -10,9 +10,7 @@ public class Day02 {
     }
     
     void part1(String input) {
-        var ranges = Stream.of(input.split(","))
-            .map(range -> range.split("-"))
-            .toArray(String[][]::new);
+        String[][] ranges = parseRanges(input);
         long sum = 0;
         for (var range : ranges) {
             // Consider that every invalid id can be sequenced based on its first half
@@ -30,9 +28,7 @@ public class Day02 {
     }
     
     void part2(String input) {
-        var ranges = Stream.of(input.split(","))
-            .map(range -> range.split("-"))
-            .toArray(String[][]::new);
+        String[][] ranges = parseRanges(input);
         long sum = 0;
         for (var range : ranges) {
             // Less clever than part 1: Just go through every number in the range and test it.
@@ -68,5 +64,11 @@ public class Day02 {
             return tail > head ? head+1 : head;
         }
         return Math.powExact(10, len/2);
+    }
+    
+    String[][] parseRanges(String input) {
+        return Stream.of(input.split(","))
+            .map(range -> range.split("-"))
+            .toArray(String[][]::new);
     }
 }
